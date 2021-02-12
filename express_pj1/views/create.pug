@@ -1,0 +1,63 @@
+doctype html
+html  
+  head
+    title 
+
+  style. 
+      .comment{
+        font-family: sans-serif;
+        line-height: 1;
+        padding: 10px;
+        border: 15px solid#555;
+        width: 1000px;
+        height: 150px;
+        overflow-y: scroll;
+      }
+      .text{  font-size:100%; text-align:left;}
+      .title{ font-size:100%;font-weight:bold;}
+      .scrollbox{
+        text-align: left; 
+        
+
+
+      }
+
+
+
+  body( style = "background-color: #f7f1e3;")
+    center
+      h1= title
+      p #{content}
+      p あなたのidは 
+        b #{id} 
+        | です。
+      
+      br
+
+      p 実験始める前に、実験同意書をご覧ください
+      .comment( style = "background-color:white;")
+        .title
+          h1 同意書
+        .scrollbox
+          
+            h3 1.情報セキュリティ
+            p 実験に関する情報は、漏れないでください。
+            h3 2.実験報酬
+            p 実験の報酬は1000円/時間です。
+            br
+
+        
+
+      br
+      br
+
+      p 問題なければ、「同意」ボタンを押してください。
+      p そして、スタッフの指示通り、DSに乗ってください。
+
+       form(method="post" action="create/ques")
+        input(type = 'hidden', name = "iddata", value = id)
+        input(type = "submit" value="同意")
+
+      br
+      br
+      br

@@ -1,0 +1,203 @@
+a{
+  text-decoration: none;
+}
+
+
+
+.button {
+  display       : inline-block;
+  border-radius : 5%;          /* 角丸       */
+  font-size     : 12pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 12px 12px;   /* 余白       */
+  background    : #000066;     /* 背景色     */
+  color         : #ffffff;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+  box-shadow    : 6px 6px 3px #666666;  /* 影の設定 */
+  border        : 2px solid #000066;    /* 枠の指定 */
+}
+.button:hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #000066;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+
+.commment a:visited {
+  color: white
+}
+
+
+.slidershow{
+  width: 400px;
+  height: 225px;
+  overflow: hidden;
+  float: right;
+  padding: 0%;
+  margin: 0%;
+  margin-right: 5%;
+}
+
+.middle{
+
+  top:0%;
+  right: 0%;
+  
+}
+
+.navigation{
+  position: relative;
+  bottom: 15%;
+  left: 100px;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+      /*transform: translateX(-50%);*/
+  display: flex;
+}
+
+.bar{
+  width:50px;
+  height:10px;
+  border: 2px solid#c7ecee;
+  margin: 6px;
+  cursor: pointer;
+}
+.bar:hover{
+  background:whitesmoke;
+  transition: 0.3s;
+}
+
+input[name="r"]{
+  position: absolute;
+  visibility :hidden;
+}
+
+.slides{
+  width: 500%;
+  height:100%;
+  display: flex;
+}
+.slide{
+  width: 20%;
+  transition: 0.6s;
+}
+.slide img{
+  width: 100%;
+  
+}
+
+#r1:checked ~ .s1{
+  margin-left:0 ;
+}
+#r2:checked ~ .s1{
+  margin-left: -20%
+}
+#r3:checked ~ .s1{
+  margin-left: -40%
+}
+  
+.submenu{
+
+  height:50px; 
+  width:1900px;
+  color:blue;
+  font-size: 20px;
+  font-weight:bold;
+  border: 1px solid #fff;
+  line-height: 50px;
+  text-align: center;
+
+  overflow: hidden;
+  background-size: 100% 100%;
+  margin:0px;
+
+  display: block;
+  position: relative;
+
+  transition: .7s;
+  -webkit-filter: brightness(0.7);
+  cursor: pointer;
+
+
+}
+
+.submenu a:visited{
+  color:#130f40;
+}
+
+.submenu:hover{
+  transform: scale(1.1);
+  color: #fff;
+  border: 6px solid#fff;
+  overflow:hidden;
+
+  -webkit-filter: brightness(1.05);
+  -webkit-filter: blur(0px);
+  
+}
+
+.submenu:hover a:visited{
+
+  font-size: 30px;
+}
+
+
+#sm1::after{
+
+  content:"";
+  background:url(../car11.jpg);
+  opacity:0.5;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  position: absolute;
+  z-index:-1;
+  overflow:hidden;
+}
+
+
+
+#sm2::after{
+  content:"";
+  background:url(../car22.jpg);
+  opacity:0.5;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  position: absolute;
+  z-index:-1;
+}
+#sm3::after{
+  content:"";
+  background:url(../car33.jpg);
+  opacity:0.5;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  position: absolute;
+  z-index:-1;
+}
+
+.researchbox{
+  width: 1700px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-top: 10px;
+  padding-right :30px;
+  border: 2px solid black;
+  background-color: aliceblue;
+
+  overflow: hidden;
+
+}
+.researchbox img{
+  float: right;
+  width: 400px;
+}
+
+

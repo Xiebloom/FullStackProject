@@ -1,0 +1,41 @@
+extends layout.pug
+
+block content
+
+  
+    center
+      h1.result= title
+
+      p #{content} を選択されました。
+      p ご参加いただきありがとうございました。
+
+      a(class='button' href='/') ホームページに戻る
+      br
+      br
+      br
+      - let user = {name:"Domenic", loggedin: false, lastlogin: 9}
+      if user.loggedin
+        p 
+          | Welcome back
+          strong #{ user.name }
+
+      else if user.lastlogin < 10
+        h2 データを確認する
+        p 
+          a(class ="button" href="/hello") データ登録と検索ページ
+
+      else 
+        a(class="button" herf='/hello') go back
+
+
+      -const orderstatus = 'pending'
+
+      case orderstatus
+        when 'pending'
+          //  p it is pending
+        when 'transit'
+          p it is transit
+        when 'completed'
+          p it is done
+        default 
+          p i dont know

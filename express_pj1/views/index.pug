@@ -1,0 +1,194 @@
+doctype html
+html  
+  head
+    title System Index 
+    link(rel='stylesheet' type="text/css" href='/stylesheets/style.css')
+    //script(type='text/javascript', src='/javascripts/jsfile.js')
+    style. 
+      .comment{
+        background-color:#DDDDDD;
+        font-family: sans-serif;
+        line-height: 2;
+        padding: 10px;
+        border: 0px ;
+        width: 100px;
+        opacity: 0.6;
+      }
+      .date{  font-size:85%; text-align:right;}
+      .author{ font-size:110%;font-weight:bold;}
+      .text{ font-size:100%}
+      .comment:hover{
+        opacity: 1 ;
+
+      }
+      .img {
+        width:800px ;
+      }
+      .img img{ 
+        width:100%; 
+        justify-content:right;
+        }
+
+
+  body(style = "background-color: #F5F5F5")
+    .author.test 
+    .comment( style = "position:fixed;           right:100px;         bottom:100px;        border-radius:20%"  )  
+
+      .text 
+        a(class='button' href='/hello') 新規実験登録
+
+
+
+
+
+    .container  
+      .header(style = "text-align: center; border:2px " )
+        h1(style='margin-bottom:0;')= title
+        p #{content}!
+        //img(src = "/testimg.png" width= "200px" height="200px" alt = "img title" )
+
+
+
+      .menu
+        h2.submenu#sm1(  onclick="window.open('/#intro','_self')" )  
+          a(href = "#intro") 実験紹介
+            img(src="car1.jpg" alt="") 
+            
+            
+        h2.submenu#sm2(  onclick="window.open('/#functions','_self')" )   
+          a(href = "#functions") 機能紹介 
+        h2.submenu#sm3(  onclick="window.open('/#ques','_self')" )
+          a(href = "#ques") アンケート問題一覧
+
+      .content(style='background-color:#FFFFFF; padding : 50px ')     
+        //- - const pStyle = {"text-align":"left", "text-transform":"uppercase"};
+        //- p(style = "text-align: left; text-transform: uppercase;") 機能を使いたいなら
+        //- p(style= pStyle) 下のリンクを押してください。
+
+        //- h2 
+        //-   a(class='button' href='/hello') 既存データ検索 または 新規実験登録
+
+        br
+        .intro
+          a(id = 'intro')
+            h2 実験紹介
+            hr( style= " color:#987cb9; SIZE:3")
+
+            .researchbox
+              h3 実験背景
+              p 実験背景です  
+
+
+              h3 使用方法
+              p Adobe XDは、共同作業を促進するパワフルで使いやすいプラットフォーム。webサイトやモバイルアプリ、音声インターフェイス、
+              |  ゲームなどのデザイン制作をチーム全体でスムーズにおこなうことができます。
+              | Adobe XDは、共同作業を促進するパワフルで使いやすいプラットフォーム。
+              |  webサイトやモバイルアプリ、音声インターフェイス、
+              |  ゲームなどのデザイン制作をチーム全体でスムーズにおこなうことができます。
+              | Adobe XDは、共同作業を促進するパワフルで使いやすいプラットフォーム。
+              |  webサイトやモバイルアプリ、音声インターフェイス、
+              |  ゲームなどのデザイン制作をチーム全体でスムーズにおこなうことができます。
+              | Adobe XDは、共同作業を促進するパワフルで使いやすいプラットフォーム。
+              |  webサイトやモバイルアプリ、音声インターフェイス、
+              |  ゲームなどのデザイン制作をチーム全体でスムーズにおこなうことができます。
+              | Adobe XDは、共同作業を促進するパワフルで使いやすいプラットフォーム。
+              |  webサイトやモバイルアプリ、音声インターフェイス、
+              |  ゲームなどのデザイン制作をチーム全体でスムーズにおこなうことができます。
+              | Adobe XDは、共同作業を促進するパワフルで使いやすいプラットフォーム。
+              |  webサイトやモバイルアプリ、音声インターフェイス、
+              |  ゲームなどのデザイン制作をチーム全体でスムーズにおこなうことができます。
+
+
+
+        .functions
+          a(id = 'functions')
+            br
+          .texts
+            h2 機能紹介
+            hr( style= " color:#987cb9; SIZE:3")
+            .researchbox
+
+              .slidershow.middle
+                .slides
+                  input#r1(type='radio' name='r' check='')
+                  input#r2(type='radio' name='r' check='')
+                  input#r3(type='radio' name='r' check='')
+                  .slide.s1 
+                    img(src = "car1.jpg" alt="" style = "height: 100%")
+                  .slide
+                    img(src = "car2.jpg" alt = "")
+                  .slide
+                    img(src = "car3.jpg" alt = "")
+                .navigation
+                  label.bar(for='r1')
+                  label.bar(for='r2')
+                  label.bar(for='r3')
+              .ftext
+                h3 実験データ記録及び分析
+                p(style = "width : 1000px"). 
+                  データというのは
+                  チームでリアルタイムに共同作業。全員が同じ情報を共有し、
+                  スピーディに制作を進めることができます。
+                  チームでリアルタイムに共同作業。全員が同じ情報を共有し、
+                  スピーディに制作を進めることができます。
+                  チームでリアルタイムに共同作業。全員が同じ情報を共有し、
+                  スピーディに制作を進めることができます。
+                  チームでリアルタイムに共同作業。全員が同じ情報を共有し、
+                  スピーディに制作を進めることができます。
+        .ques
+          br     
+          h2 アンケート問題一覧        
+          hr( style= " color:#987cb9; SIZE:3")
+          .researchbox
+          
+            a(id = 'ques')
+
+              p Q1.なるほどですね？
+              p   全然違う | -1 | 0 | 1 | 完全一致
+              p Q2.まだ来てくれる？
+              p   はい　　いいえ
+              p Q3.なるほどですね？
+              p   全然違う | -1 | 0 | 1 | 完全一致
+              p Q4.まだ来てくれる？
+              p   はい　　いいえ
+              p Q5.なるほどですね？
+              p   全然違う | -1 | 0 | 1 | 完全一致
+              p Q6.まだ来てくれる？
+              p   はい　　いいえ
+              p Q7.なるほどですね？
+              p   全然違う | -1 | 0 | 1 | 完全一致
+              p Q8.まだ来てくれる？
+              p   はい　　いいえ
+
+        
+      
+    hr( style= " color:#987cb9; SIZE:3")
+
+
+
+
+    .footer( style = "color:#666666; text-align:center")
+        p copyright ©2020 福岡Nishimu 博多　電話：080-2343-1231
+
+
+
+
+
+//
+// h2 データ入力、検索ページへ
+// 以下为超链接
+// a(class='button' href='/hello') データ登録ページへ
+//input (type = "password" name="inpPwd" data-js='${1 > 2? "OK" : "Not OK"}')
+//-const myclass = ["class1","class2"]
+//div(class= )
+
+
+
+
+  //h1 company name
+    nav 
+      a(href="/hello") home
+      br
+      a(href="") about us
+      br
+      a(href="#") contact us

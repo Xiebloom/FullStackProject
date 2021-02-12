@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html> 
+  <center>
+    <head> 
+      <h1></h1>
+    </head>
+  </center>
+  <style>
+    .text{  
+      font-size:100%; 
+      text-align:left;
+      font-family: sans-serif;
+      line-height: 1;
+      padding: 30px;
+      border: 15px solid#555;
+      margin: 20px;
+      width: 1000px;
+    }
+    .title{ font-size:100%;font-weight:bold;}
+    
+    
+    
+  </style>
+  <body style="background-color: #f7f1e3;">
+    <center>
+      <p>実験参加いただき、ありがとうございます。</p>
+      <p>こちらのアンケートを</p>
+    </center>
+  </body><br>
+  <center>
+    <form method="post" action="/ques/thanks">
+      <div class="comment">   
+        <div class="text" style="text-align: left; background-color: #fff;">
+          <h2 style="text-align: center; font-family : HGS明朝E">実験アンケート</h2>
+          <p style="text-align: center">数字で、気持ちの強さを表示してお願いいたします。</p><br>
+          <p>Q1 まだこの自動運転機能を使いますか？</p>
+          <p>二度と触らない    
+            <input type="radio" name="Q1" value="1">
+            <Thing>-2 </Thing>
+            <input type="radio" name="Q1" value="2">
+            <Thing>-1 </Thing>
+            <input type="radio" name="Q1" value="3">
+            <Thing>0 </Thing>
+            <input type="radio" name="Q1" value="4">
+            <Thing>1 </Thing>
+            <input type="radio" name="Q1" value="5">
+            <Thing>2  とても使いたい</Thing>
+          </p><br>
+          <p>Q2 思うままに自動運転していましたか？</p>
+          <p>全然違う
+            <input type="radio" name="Q2" value="1">
+            <Q2>-1 </Q2>
+            <input type="radio" name="Q2" value="2">
+            <Q2>0 </Q2>
+            <input type="radio" name="Q2" value="3">
+            <Q2>1 完全一致</Q2>
+          </p><br>
+          <p>Q3 不確かさを表示する場合、システムの現状もっと把握しているのを感じしましたか？</p>
+          <p>全然感じなかった
+            <input type="radio" name="Q3" value="1">
+            <Q2>-1 </Q2>
+            <input type="radio" name="Q3" value="2">
+            <Q2>0 </Q2>
+            <input type="radio" name="Q3" value="3">
+            <Q2>1 大きく感じた</Q2>
+          </p>
+        </div>
+        <input type="hidden" name="iddata">
+        <input type="submit" value="送信">
+      </div>
+    </form><br><br>
+  </center>
+</html>

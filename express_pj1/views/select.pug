@@ -1,0 +1,53 @@
+doctype html
+html  
+  head
+
+    style.
+
+      .qresult{
+        width: 300px;
+        overflow: auto;
+        padding: 10px;
+        margin: 20px;
+        height: 240px;
+      }
+
+      .tableresult{
+        
+        padding: 10px;
+        margin: 20px;
+      }
+
+      .pagebox{
+        display: flex;
+        justify-content: center;
+        align-items: up;
+      }
+
+  body( style = "background-color: #f7f1e3;") 
+
+    center
+      h1= title
+      p #{content}
+
+    .pagebox
+      .qresult(style = "border : 10px solid#555")
+        h2 アンケート結果
+        - for(var i = 0; i<3 ; i++)
+          p Q#{i}.  #{QuestionsAnswer[i]}
+      
+    
+      .tableresult
+        table(border='1')
+          tbody
+            tr
+              td 
+                h2 開始時間
+              td 
+                h2 終了時間
+            
+            - for (var i = 0; i<resulttobrowser0.length ;i++)
+              tr
+                td #{Math.floor(resulttobrowser0[i]*100)/100} 
+                td #{Math.floor(resulttobrowser1[i]*100)/100}
+

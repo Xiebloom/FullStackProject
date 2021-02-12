@@ -1,0 +1,33 @@
+extends layout
+
+block content
+ 
+
+  center 
+    br
+    h1(style = "font-family : HGS明朝E;")= title
+    p #{content}
+
+
+
+    form(method="post" action="/hello/create") 
+      //絶対パス
+      //- 無/的话就是相対パス
+      h2 新規実験登録
+      p お名前を入力してください
+      input(type="text" name="userName" )
+      input(type="submit" value="登録")
+
+    br
+    br
+
+    form(method="post" action="/hello/select")
+      h2 データ検索
+      p 検索したいIDを入力してください
+      input(type="text" name="userID")
+      input(type="submit" value= "検索")
+
+    p #{resulttobrowser0}
+    br
+    p #{resulttobrowser1}
+

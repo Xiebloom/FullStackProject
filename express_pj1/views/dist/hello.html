@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+    <link rel="stylesheet" href="/stylesheets/layoutcss.css">
+    <style>
+      .body{
+       
+        background:url(../car1.jpg);
+      }
+      
+      
+    </style>
+  </head>
+  <body style="background-color: #f7f1e3;">
+    <center> <br>
+      <h1 style="font-family : HGS明朝E;"></h1>
+      <p></p>
+      <form method="post" action="/hello/create"> 
+        <!--絶対パス-->
+        <h2>新規実験登録</h2>
+        <p>お名前を入力してください</p>
+        <input type="text" name="userName">
+        <input type="submit" value="登録">
+      </form><br><br>
+      <form method="post" action="/hello/select">
+        <h2>データ検索</h2>
+        <p>検索したいIDを入力してください</p>
+        <input type="text" name="userID">
+        <input type="submit" value="検索">
+      </form>
+      <p></p><br>
+      <p></p>
+    </center>
+  </body>
+</html>
