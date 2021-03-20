@@ -8,9 +8,11 @@
 
 ## 1 需求分析
 > mentor 没有给我提出项目的任务，而是问我想做一个什么样子的项目...所以这部分的需求是我自己提出来的。
+> 
 > 项目背景：
 > 我们研究室的研究和 vr 相关，涉及到人的眼动、手脚行为等大量数据，因此我希望能有一个全研究室能共享的数据库，通过局域网可访问，并且前端界面简洁明了。
 > 此外，在进行 VR 的实验时，采集的数据能自动上传到数据库。
+> 
 > 由此，抽象出以下项目需求
 * 实现一个实验数据记录系统，可为每位实验参与者自动编号，并在实验结束后，将实验数据上传至研究室内的服务器。此外，能通过查询页面快速访问实验记录。
 ※ 但是在实习过程中没有进行实验，也没有局域网，因此本项目的所有内容均是在本地完成。
@@ -44,3 +46,179 @@
 * 增加表单提交检测
 
 ---
+
+## 4 经过半年后复盘所发现的不足之处
+### 4.1 HTML 没有骨架
+- HTML 文件没有明显的骨架(header / footer / main等)
+- HTML 的语义化基本没有，全靠的 div
+- 排版竟然靠的 br
+### 4.2 CSS 使用混乱
+- 内嵌，内联，外联三者混用
+- 各类的排序混乱，维护非常不方便
+- 重复定义，不合标准等无效的语句过多
+### 4.3 Express 路由的理解与使用错误
+- 本来 create / select 两个二级路由即可，但是实际上居然每个页面都设置了一个 router，然后引入到了 app.js
+- 命名为 create.js 的文件，里面居然写着
+```
+app.post('/ques', function(){...});
+```
+这到底是不是 /create 的路由啊？
+### 4.4 JS 回调地狱
+例如查找数据的功能中，一共有以下 **5** 层缩进
+1. 连接数据库 pgPool.connect({})
+  2. 若 error，则抛出， else{}
+    3. 将数据写入数据库 client.query({})
+      4. 如果无法写入则抛出，else{}
+        5. 处理逻辑
+```
+// 原本的代码
+var querysql = {
+    text:
+        'SELECT starttime,finishtime,id,name FROM public."TEST_TBL" INNER JOIN public."EXAMDATA" ON public."TEST_TBL".id = public."EXAMDATA".userid  WHERE userid = $1',   //sqlのテーブル結合
+    values: [id]
+};
+
+//链接DB拿开始时间，结束时间 ・　DBから開始時間と終了時間を抽出
+pgPool.connect(function (err, client) {
+    if (err) {
+        console.log(err);
+    }
+    else {
+        client   //获取数据
+            .query(querysql, function (err, result) {
+                if (err) {
+                    console.log(err);
+                    console.log('querySQL failed!')
+                }
+                else {
+                    //若通过用户ID，找到了确实存在的数据　・　IDが確かに存在する場合
+                    if (result.rows.length) {
+                        console.log('time data Found.')
+                        userName = result.rows[0].name;
+                        id = result.rows[0].id;
+                        foundtimedata = result.rows;  //获取数据，类型为JS对象
+                        resulttobrowser = foundtimedata;   //对 JS 对象进行保存
+
+                        //将获得的数据，分成起始时间和结束时间转化为数组
+                        for (var i = 0; i < foundtimedata.length; i++) {
+                            foundstarttime[i] = foundtimedata[i].starttime; //开始时间数组
+                            foundfinishtime[i] = foundtimedata[i].finishtime; //结束时间数组
+                        }
+
+                        //  传送给DB的text，用户ID对应的问卷结果・　当IDのアンケート回答結果
+                        console.log('find id = ' + id);
+                        var querysql = {
+                            text:
+                                'SELECT answer FROM public."ques" WHERE ques_id = $1',
+                            values: [id]
+                        };
+
+                        client   //获取アンケート結果
+                            .query(querysql, function (err, result) {
+                                if (err) {
+                                    console.log(err);
+                                    console.log('querySQL failed!')
+                                }
+                                else {
+                                    if (result.rows.length) {
+                                        console.log(result);
+                                        var quesans = new Array();
+
+                                        for (var i = 0; i < 3; i++) {
+                                            if (typeof (result.rows[i]) == "undefined") {
+                                                console.log("not found;");
+                                                quesans[i] = "無";
+                                            }
+                                            else {
+                                                quesans[i] = result.rows[i].answer;
+                                            }
+                                        }
+                                        console.log(quesans);
+                                        //传给pug数据・データをpugに渡す
+                                        var data = {
+                                            title: 'DB抽出完了',
+                                            content: 'idは' + id + 'の' + userName + 'さんを選択しました。',
+                                            resulttobrowser0: foundstarttime,
+                                            resulttobrowser1: foundfinishtime,
+                                            QuestionsAnswer: quesans,
+                                        }
+                                        res.render('select', data);
+                                    }
+                                    else {
+                                        console.log('data not found.')
+                                        var data = {
+                                            title: 'DB抽出完了',
+                                            content: 'idは' + id + 'の' + userName + 'さんを選択しました。',
+                                            resulttobrowser0: foundstarttime,
+                                            resulttobrowser1: foundfinishtime,
+                                            QuestionsAnswer: "無無無",
+                                        }
+                                        res.render('select', data);
+                                    }
+                                }
+                            });
+                    }
+
+                    //当IDが存在してない
+                    else {
+                        console.log('data not found.')
+                        data = {
+                            title: 'DB抽出完了',
+                            content: '当IDは見つけませんでした',
+                            resulttobrowser0: 'データなし',
+                            resulttobrowser1: 'データなし',
+                            QuestionsAnswer: "無無無",
+                        }
+                        res.render('select', data);
+                    }
+                }
+            });
+    }
+});
+```
+> 注：因为最后的渲染模板页面是同步任务，而取得数据库的数据是异步任务，所以在不使用 promise 的情况下必须层层嵌套 --> 回调地狱
+> 以下是修改版，因为没有实际跑过所以不知道能否正确运行，总之记录以下思路吧
+```
+function accessDatabase() {
+    return new Promise((resolve, reject) => {
+        pgPool.connect(function (err, client) {
+            if (err) {
+                console.log(err);
+                reject(err)
+            }
+            else {
+                resolve(client);
+            }
+        }
+    }
+}
+
+function getData(client, querysql) {
+    return new Promise((resolve, rejecct) => {
+        client.query(querysql, function (err, res) {
+            if (err) {
+                console.log('getData failed!')
+                reject(err)
+            }
+            else {
+                resolve(res)
+            }
+        })
+    })
+}
+
+
+async function renderPage() {
+    try {
+        let client = await accessDatabase();
+        let result1 = await getData(client,querysql1);
+        // 对 result1 进行正确性判断
+        let result2 = await getData(client,querysql2);
+        // 对 result2 进行正确性判断
+        let data = dataFormat(result1, result2)
+        routerRes.render(data);
+    } catch (e) {
+        console.log(e);
+    }
+}
+```
