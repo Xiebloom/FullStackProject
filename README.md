@@ -62,7 +62,7 @@
 ```
 app.post('/ques', function(){...});
 ```
-这到底是不是 /create 的路由啊？
+※ 我甚至开始怀疑我是不是把文件名标错了？
 ### 4.4 JS 回调地狱
 例如查找数据的功能中，一共有以下 **5** 层缩进
 ```
@@ -182,7 +182,8 @@ pgPool.connect(function (err, client) {
 > 注：因为最后的渲染模板页面是同步任务，而取得数据库的数据是异步任务，所以在不使用 promise 的情况下必须层层嵌套 --> 回调地狱
 > 
 > 以下是修改版，因为没有实际跑过所以不知道能否正确运行，总之记录下思路吧
-```
+``` Javascript
+// 连接数据库，成功则返回 client 对象
 function accessDatabase() {
     return new Promise((resolve, reject) => {
         pgPool.connect(function (err, client) {
@@ -197,6 +198,7 @@ function accessDatabase() {
     }
 }
 
+// 对数据库进行操作，成功则返回取出的数据
 function getData(client, querysql) {
     return new Promise((resolve, rejecct) => {
         client.query(querysql, function (err, res) {
@@ -211,14 +213,16 @@ function getData(client, querysql) {
     })
 }
 
-
+// 总的 async 函数，内部使用 await 控制异步操作
 async function renderPage() {
     try {
         let client = await accessDatabase();
         let result1 = await getData(client,querysql1);
         // 对 result1 进行正确性判断
+        // ...判断函数
         let result2 = await getData(client,querysql2);
         // 对 result2 进行正确性判断
+        // ...判断函数
         let data = dataFormat(result1, result2)
         routerRes.render(data);
     } catch (e) {
@@ -226,3 +230,25 @@ async function renderPage() {
     }
 }
 ```
+
+## 5 项目总结
+> 作为前端学习的启蒙项目，当时的实习，最近的复盘，一套走下来收获很大！
+1. 本项目涉及到了基本的前端操作
+* 利用 HTML / CSS 进行网页搭建
+  * 基本的表单提交
+  * 基本的样式设定
+  * 糊里糊涂弄出来的轮播图和指针悬浮缩放
+* 利用 JS 进行基本的逻辑判断
+  * 提交表单的正确性验证
+  * 非常遗憾的是，由于当时并没有跟着教程走，而是乱玩，基本的 DOM 操作等并没有涉及到
+2. 基本的后端知识和操作
+* 数据库知识
+* 后端数据的读写
+* postgreSQL 的基本使用方法
+3. 全栈工程的设计流程（日本，国内应该不一样吧）
+4. 经过复盘，加深了一些实际中应该会很常用的知识点
+* 异步操作
+* Express框架
+* 前端路由等
+
+
