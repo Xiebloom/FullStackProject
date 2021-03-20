@@ -65,19 +65,14 @@ app.post('/ques', function(){...});
 这到底是不是 /create 的路由啊？
 ### 4.4 JS 回调地狱
 例如查找数据的功能中，一共有以下 **5** 层缩进
+```
 1. 连接数据库 pgPool.connect({})
-
-
   2. 若 error，则抛出， else{}
-
-
     3. 将数据写入数据库 client.query({})
-
-
       4. 如果无法写入则抛出，else{}
-
-
         5. 处理逻辑
+```
+
 ```
 // 原本的代码
 var querysql = {
@@ -185,7 +180,8 @@ pgPool.connect(function (err, client) {
 });
 ```
 > 注：因为最后的渲染模板页面是同步任务，而取得数据库的数据是异步任务，所以在不使用 promise 的情况下必须层层嵌套 --> 回调地狱
-> 以下是修改版，因为没有实际跑过所以不知道能否正确运行，总之记录以下思路吧
+> 
+> 以下是修改版，因为没有实际跑过所以不知道能否正确运行，总之记录下思路吧
 ```
 function accessDatabase() {
     return new Promise((resolve, reject) => {
